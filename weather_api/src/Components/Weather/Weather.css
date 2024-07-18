@@ -26,11 +26,11 @@
     font-size: max(2vw, 20px);
 }
 
-.weather-info h2 {
-    marginTop: 10px,
-    color: #8B4513,
-    font-size: max(1.6vw, 20px);
-        
+.weather-info .last-updated {
+    color: rgb(115, 46, 46);
+    font-weight: 500;
+    margin-top: 10px;
+    font-size: max(1.5vw, 15px);
 }
 .weather-info-left {
     display: flex;
