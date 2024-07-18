@@ -20,7 +20,7 @@ const Navbar = ({setShowLogin}) => {
         <img onClick={()=>navigate("/")} src="/src/assets/cloud.png" alt="logo" className="logo"/>
         <h1>Weather Dashboard</h1>
         <div className="navbar-right">
-          <img onClick={!token?()=>setShowLogin(true):()=>navigate("/notify")} className="bell" src="/src/assets/bell.png" alt="" />
+          <img onClick={!token?()=>setShowLogin(true):()=>navigate("/notify")} className="bell" src="/public/bell.png" alt="" />
           {token && 
             <div className='navbar-profile-name'>
                <h3>Hello </h3> 
