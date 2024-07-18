@@ -20,7 +20,7 @@ app.use(cors());
 app.use("/api/user", userRoute);
 app.use('/api/weather', weatherRouter);
 app.use('/api/email', emailRoute);
-app.use('images', express.static('uploads'));
+app.use('/images', express.static('uploads'));
 
 // send daily emails
 cron.schedule('59 11 * * *', async () => {

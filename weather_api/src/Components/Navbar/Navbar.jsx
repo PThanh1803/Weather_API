@@ -5,7 +5,7 @@ import { StoreContext } from '../../Context/StoreContext'
 import { useNavigate } from 'react-router-dom'
 
 const Navbar = ({setShowLogin}) => {
-  const {token ,setToken, userData} = React.useContext(StoreContext)
+  const {token ,setToken, userData, url} = React.useContext(StoreContext)
 
   const navigate = useNavigate();
   const logout = ()=>{
@@ -20,7 +20,7 @@ const Navbar = ({setShowLogin}) => {
         <img onClick={()=>navigate("/")} src="/src/assets/cloud.png" alt="logo" className="logo"/>
         <h1>Weather Dashboard</h1>
         <div className="navbar-right">
-          <img onClick={!token?()=>setShowLogin(true):()=>navigate("/notify")} className="bell" src="/public/bell.png" alt="" />
+          <img onClick={!token?()=>setShowLogin(true):()=>navigate("/notify")} className="bell" src="/src/assets/bell.png" alt="Bell_icon" />
           {token && 
             <div className='navbar-profile-name'>
                <h3>Hello </h3> 
