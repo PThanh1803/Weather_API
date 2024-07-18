@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     location: {
         type: String,
-        default:"",
+        default:"Ho Chi Minh",
     },
     announcement:{
         type: Boolean,
