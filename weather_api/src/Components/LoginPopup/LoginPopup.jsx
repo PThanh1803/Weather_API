@@ -115,9 +115,9 @@ const LoginPopup = ({ setShowLogin}) => {
                                 placeholder="Confirm Password"
                                 required
                             />
-                            <button type="button" onClick={togglePasswordVisibility}>
+                            <a onClick={togglePasswordVisibility}>
                                 {passwordVisible ? "Hide" : "Show"}
-                            </button>
+                            </a>
                         </div>
                     )}
                     <button type="submit">{curentState === "Sign Up" ? "Create Account" : (curentState === "Forgot Password" ? "Send Email" : "Login")}</button>
