@@ -7,11 +7,9 @@ import { toast } from 'react-toastify';
 import { assets } from '../../assets/assets.js';
 
 const Weather = () => {
-    const { city, url, setCity, setCurrentCity, currentCity } = useContext(StoreContext);
+    const { city, url, setCity} = useContext(StoreContext);
     const [weatherData, setWeatherData] = useState(null);
-    const [weatherError, setWeatherError] = useState(null);
     const [weatherForecast, setWeatherForecast] = useState([]);
-    const [currCity, setCurrCity] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
 
@@ -21,8 +19,6 @@ const Weather = () => {
             const response = await axios.get(`${url}/api/weather/weather?query=${city}`);
             console.log(response.data);
             setWeatherData(response.data.weatherData);
-            setCurrCity(response.data.weatherData.currentWeather.location.name);
-            setWeatherError(null);
             setWeatherForecast(response.data.weatherData.weatherForecast.forecastday);
 
             const dateTime = response.data.weatherData.currentWeather.location.localtime.split(' ');
@@ -31,16 +27,12 @@ const Weather = () => {
         } catch (error) {
             console.log(error);
             toast.error('City not found');
-            setWeatherError('City not found.');
             setCity('Ho Chi Minh');
         }
     };
 
     useEffect(() => {
         searchWeather();
-        if (weatherError === null) {
-            setCurrentCity(currCity);
-        }
     }, [city]);
 
     return (

@@ -8,7 +8,7 @@ const StoreContextProvider = (props) => {
     const [token, setToken] = useState("")
     const [userData, setUserData] = useState({})
     const [city, setCity] = useState('Ho Chi Minh')
-    const [currentCity, setCurrentCity] = useState('Ha Noi')
+    const [currentCity, setCurrentCity] = useState('Ho Chi Minh')
     const [location, setLocation] = useState('')
 
 
