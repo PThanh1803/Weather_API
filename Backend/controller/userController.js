@@ -122,6 +122,9 @@ const resetPassword = async (req, res) => {
             return res.json({ success: false, message: "Passwords do not match" });
         }
 
+        if (newPassword.length < 8) {
+            return res.json({ success: false, message: "Password not strong enough" });
+        }
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(newPassword, salt);
         await userModel.findByIdAndUpdate(user._id, { password: hashPassword });
