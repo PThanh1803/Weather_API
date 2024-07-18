@@ -58,8 +58,9 @@ const registerUser = async (req, res) => {
 
         const newUser = new userModel({ name: name, email: email, password: hashPassword, location: "Ho Chi Minh", announcement: false });
         const user = await newUser.save();
+        console.log(user);
         const token = createToken(user._id);
-        res.json({ success: true, data: token });
+        res.json({ success: true,  token });
     }
 
     catch (error) {
