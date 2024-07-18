@@ -26,6 +26,12 @@
     font-size: max(2vw, 20px);
 }
 
+.weather-info h2 {
+    marginTop: 10px,
+    color:'#8B4513',
+    font-size: max(1.6vw, 20px);
+        
+}
 .weather-info-left {
     display: flex;
     flex-direction: column;
