@@ -3,6 +3,7 @@ import './Navbar.css'
 import { Link } from 'react-router-dom'
 import { StoreContext } from '../../Context/StoreContext'
 import { useNavigate } from 'react-router-dom'
+import {assets} from '../../assets/assets.js'
 
 const Navbar = ({setShowLogin}) => {
   const {token ,setToken, userData, url} = React.useContext(StoreContext)
@@ -17,10 +18,10 @@ const Navbar = ({setShowLogin}) => {
   return (
     <div>
       <div className="navbar">
-        <img onClick={()=>navigate("/")} src="/src/assets/cloud.png" alt="logo" className="logo"/>
+        <img onClick={()=>navigate("/")} src={assets.cloud} alt="logo" className="logo"/>
         <h1>Weather Dashboard</h1>
         <div className="navbar-right">
-          <img onClick={!token?()=>setShowLogin(true):()=>navigate("/notify")} className="bell" src="/src/assets/bell.png" alt="Bell_icon" />
+          <img onClick={!token?()=>setShowLogin(true):()=>navigate("/notify")} className="bell" src={assets.bell} alt="Bell_icon" />
           {token && 
             <div className='navbar-profile-name'>
                <h3>Hello </h3> 
@@ -28,15 +29,15 @@ const Navbar = ({setShowLogin}) => {
             </div>}
           {!token ?  <button onClick={()=>setShowLogin(true)}>Sign in</button>: 
                   <div className='navbar-profile'>
-                      <img src="/src/assets/profile_icon.png" alt="" />
+                      <img src={assets.logout_icon} alt="" />
                       <ul className="nav-profile-dropdown">
                           <li onClick={()=>navigate("/notify")}> 
-                              <img src="/src/assets/search.png" alt="" />
+                              <img src={assets.search} alt="" />
                               <p>Setting</p>
                           </li>
                           <hr/>
                           <li onClick={logout}> 
-                              <img src="/src/assets/logout_icon.png" alt="" />
+                              <img src={assets.logout_icon} alt="" />
                               <p >Logout</p>   
                           </li>
                       </ul>

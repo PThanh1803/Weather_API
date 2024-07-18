@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { StoreContext } from '../../Context/StoreContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import {assets} from '../../assets/assets';
 
 const LoginPopup = ({ setShowLogin }) => {
     const { url, setToken } = useContext(StoreContext);
@@ -59,7 +60,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 <div className="login-popup-title">
                     <h2>{curentState}</h2>
                     <img 
-                        src="/src/assets/cross_icon.png"
+                        src={assets.cross_icon}
                         onClick={() => setShowLogin(false)} 
                         className="close" 
                         alt="close" 

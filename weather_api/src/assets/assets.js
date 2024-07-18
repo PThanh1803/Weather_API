@@ -1,0 +1,17 @@
+import bell from './bell.png'
+import cloud from './cloud.png'
+import clear from './clear.png'
+import cross_icon from './cross_icon.png'
+import drizzle from './drizzle.png'
+import humidity from './humidity.png'
+import logout_icon from './logout_icon.png'
+import profile_icon from './profile_icon.png'
+import rain from './rain.png'
+import search from './search.png'
+import snow from './snow.png'
+import temp from './temp.png'
+import temperature from './temperature.png'
+import wind from './wind.png'
+import weather from './weather.png'
+
+export const assets= {bell, cloud, clear, cross_icon, drizzle, humidity, logout_icon, profile_icon, rain, search, snow, temp, temperature, wind, weather}

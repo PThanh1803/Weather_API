@@ -1,5 +1,6 @@
 import React from 'react'
 import './WeatherCard.css'
+import {assets} from '../../assets/assets.js'
 
 const WeatherCard = ({weatherData}) => {
   return (
@@ -14,7 +15,7 @@ const WeatherCard = ({weatherData}) => {
         </div>
       :<div className="weather-card">
           <h2 className="weather-card-title">(2024-07-17)</h2>
-          <img src="/src/assets/cloud.png" alt="" />
+          <img src={assets.cloud} alt="" />
           <h2>Temp: 15°C</h2>
           <h2>Wind: 5km/h</h2>
           <h2>Humidity: 60%</h2>
