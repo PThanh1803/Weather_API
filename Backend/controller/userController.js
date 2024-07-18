@@ -102,4 +102,33 @@ const updateUserData = async (req, res) => {
     }
 }
 
-export { loginUser, registerUser , getUserData,updateUserData}
+const resetPassword = async (req, res) => {
+    const { email, oldPassword , newPassword, confirmNewPassword} = req.body;
+    try {
+        const user = await userModel.findOne({ email });
+
+        if (!user) {    
+            return res.json({ success: false, message: "User not found" });
+        }
+
+        const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+        if (!isMatch) {
+            return res.json({ success: false, message: "Incorrect oldpassword" });
+        }
+
+        if(newPassword !== confirmNewPassword) {
+            return res.json({ success: false, message: "Passwords do not match" });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(newPassword, salt);
+        await userModel.findByIdAndUpdate(user._id, { password: hashPassword });
+        res.json({ success: true,  message: "Password updated successfully" });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "error" });
+        
+    }
+}
+export { loginUser, registerUser , getUserData,updateUserData, resetPassword}

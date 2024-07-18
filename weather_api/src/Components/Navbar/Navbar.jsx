@@ -5,7 +5,7 @@ import { StoreContext } from '../../Context/StoreContext'
 import { useNavigate } from 'react-router-dom'
 import {assets} from '../../assets/assets.js'
 
-const Navbar = ({setShowLogin}) => {
+const Navbar = ({setShowLogin,setShowReset}) => {
   const {token ,setToken, userData, url} = React.useContext(StoreContext)
 
   const navigate = useNavigate();
@@ -29,9 +29,9 @@ const Navbar = ({setShowLogin}) => {
             </div>}
           {!token ?  <button onClick={()=>setShowLogin(true)}>Sign in</button>: 
                   <div className='navbar-profile'>
-                      <img src={assets.logout_icon} alt="" />
+                      <img src={assets.profile_icon} alt="" />
                       <ul className="nav-profile-dropdown">
-                          <li onClick={()=>navigate("/notify")}> 
+                          <li onClick={()=>setShowReset(true)}> 
                               <img src={assets.search} alt="" />
                               <p>Setting</p>
                           </li>

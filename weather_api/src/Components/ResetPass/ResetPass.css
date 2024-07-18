@@ -1,4 +1,4 @@
-.login-popup{
+.reset-pass-popup {
     position: absolute;
     z-index: 1;
     width: 100%;
@@ -7,14 +7,14 @@
     display: grid;
 }
 
-.login-popup-container{
+.reset-pass-popup-container {
     place-self: center;
     background-color: white;
     color: #808080;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    padding:  25px 40px;
+    padding: 25px 40px;
     border-radius: 10px;
     width: min(600px, 90%);
     height: min(520px, 60%);
@@ -22,44 +22,45 @@
     animation: fadeIn 0.5s;
 }
 
-.login-popup-title{
-    display: flex;;
+.reset-pass-popup-title {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     color: black;
 }
 
-.login-popup-title img{
+.reset-pass-popup-title img {
     width: 16px;
     cursor: pointer;
 }
 
-.login-popup-inputs{
+.reset-pass-popup-inputs {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
 }
 
-.login-popup-inputs .password-container{
+.reset-pass-popup-inputs .password-container{
     position: relative;
     display: flex;
     align-items: center;
     gap: 1px;
+    font-size: max(1.2vw, 12px);
 }
 
-.login-popup-inputs .password-container a{
+.reset-pass-popup-inputs .password-container a{
     position: absolute;
     right: 10px;
     color: #808080;
     cursor: pointer;
+    font-size: max(0.8vw, 12px);
 }
 
-.login-popup-inputs .password-container a:hover{
+.reset-pass-popup-inputs .password-container a:hover{
     color: tomato;
     cursor: pointer;
 }
-.login-popup-inputs input{
+.reset-pass-popup-inputs input {
     width: 100%;
     padding: 10px 15px;
     border: 1px solid #808080;
@@ -67,7 +68,7 @@
     font-size: max(1vw, 12px);
 }
 
-.login-popup-inputs button{
+.reset-pass-popup-inputs button {
     width: 100%;
     border: none;
     border-radius: 5px;
@@ -80,19 +81,6 @@
     transition: 0.5s;
 }
 
-.login-popup-condition{
-    display: flex;
-    align-items: start;
-    gap: 5px;
-    margin-top: -15px;
-    font-size: max(1vw, 12px);
-}
-
-.login-popup-condition input{
-    margin-top: 5px;
-}
-
-.login-popup-container .link {
-    color: tomato;
-    cursor: pointer;
+.reset-pass-popup-inputs button:hover {
+    background-color: #ff6347;
 }

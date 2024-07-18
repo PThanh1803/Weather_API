@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import './LoginPopup.css';
-import { useContext } from 'react';
 import { StoreContext } from '../../Context/StoreContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import {assets} from '../../assets/assets';
+import { assets } from '../../assets/assets';
 
-const LoginPopup = ({ setShowLogin }) => {
-    const { url, setToken } = useContext(StoreContext);
-    const [curentState, setCurrentState] = React.useState("Login");
-    const [data, setData] = React.useState({
+const LoginPopup = ({ setShowLogin}) => {
+    const { url } = useContext(StoreContext);
+    const { setToken } = useContext(StoreContext);
+    const [curentState, setCurrentState] = useState("Login");
+    const [data, setData] = useState({
         name: '',
         email: '',
         password: '',
         confirmPassword: '',
     });
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     const onChangeHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setData(data => ({ ...data, [name]: value }));
+    }
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    }
+
+    const onForgetPassword = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post(`${url}/api/email/password`, { email: data.email });
+            if (response.data.success) {
+                toast.success(response.data.message);
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            console.error("There was an error!", error);
+        }
     }
 
     const onLogin = async (event) => {
@@ -33,16 +52,19 @@ const LoginPopup = ({ setShowLogin }) => {
         let newUrl = url;
         if (curentState === "Login") {
             newUrl = `${url}/api/user/login`;
-        } else {
+        } else if (curentState === "Sign Up") {
             newUrl = `${url}/api/user/register`;
+        } else if (curentState === "Forgot Password") {
+            newUrl = `${url}/api/user/forgot-password`;
         }
 
         try {
             const response = await axios.post(newUrl, data);
             if (response.data.success) {
-                setToken(response.data.token);
-                console.log(response.data.token);
-                localStorage.setItem("token", response.data.token);
+                if (curentState === "Login" || curentState === "Sign Up") {
+                    setToken(response.data.token);
+                    localStorage.setItem("token", response.data.token);
+                }
                 setShowLogin(false);
                 toast.success(response.data.message);
             } else {
@@ -56,7 +78,7 @@ const LoginPopup = ({ setShowLogin }) => {
 
     return (
         <div className='login-popup'>
-            <form onSubmit={onLogin} className="login-popup-container">
+            <form onSubmit={curentState === "Forgot Password" ? onForgetPassword : onLogin} className="login-popup-container">
                 <div className="login-popup-title">
                     <h2>{curentState}</h2>
                     <img 
@@ -68,35 +90,79 @@ const LoginPopup = ({ setShowLogin }) => {
                 </div>
 
                 <div className="login-popup-inputs">
-                    {curentState === "Login" ? null : <input name="name" onChange={onChangeHandler} value={data.name} type="text" placeholder="Name" required />}
+                    {curentState === "Sign Up" && <input name="name" onChange={onChangeHandler} value={data.name} type="text" placeholder="Name" required />}
                     <input name="email" onChange={onChangeHandler} value={data.email} type="email" placeholder="Email" required />
-                    <input name="password" onChange={onChangeHandler} value={data.password} type="password" placeholder="Password" required />
-                    {curentState === "Login" ? null : <input name="confirmPassword" onChange={onChangeHandler} value={data.confirmPassword} type="password" placeholder="Confirm Password" required />}
-                    <button type="submit">{curentState === "Sign Up" ? "Create Account" : "Login"}</button>
+                    {(curentState === "Login" || curentState === "Sign Up") && (
+                        <div className="password-container">
+                            <input
+                                name="password"
+                                onChange={onChangeHandler}
+                                value={data.password}
+                                type={passwordVisible ? "text" : "password"}
+                                placeholder="Password"
+                                required
+                            > </input>              
+                            <a onClick={togglePasswordVisibility}> {passwordVisible ? "Hide" : "Show"}</a>
+                        </div>
+                    )}
+                    {curentState === "Sign Up" && (
+                        <div className="password-container">
+                            <input
+                                name="confirmPassword"
+                                onChange={onChangeHandler}
+                                value={data.confirmPassword}
+                                type={passwordVisible ? "text" : "password"}
+                                placeholder="Confirm Password"
+                                required
+                            />
+                            <button type="button" onClick={togglePasswordVisibility}>
+                                {passwordVisible ? "Hide" : "Show"}
+                            </button>
+                        </div>
+                    )}
+                    <button type="submit">{curentState === "Sign Up" ? "Create Account" : (curentState === "Forgot Password" ? "Send Email" : "Login")}</button>
                 </div>
 
-                {curentState !== "Login" ? 
+                {curentState === "Sign Up" && (
                     <div className="login-popup-condition">
                         <input type="checkbox" required />
                         <p>By creating an account, you agree to our <span>Terms and conditions</span></p>
-                    </div> 
-                    : null
-                }
+                    </div>
+                )}
 
-                {curentState === "Login" ? 
-                    <p>
-                        Create a new account. 
-                        <span className="link" onClick={() => setCurrentState("Sign Up")}>
-                            &nbsp;Click here   
-                        </span>
-                    </p> : 
+                {curentState === "Login" && (
+                    <div>
+                        <p>
+                            Create a new account. 
+                            <span className="link" onClick={() => setCurrentState("Sign Up")}>
+                                &nbsp;Click here   
+                            </span>
+                        </p>
+                        <p style={{ marginTop: "30px", textAlign: "center" }}>
+                            <span className="link" onClick={() => setCurrentState("Forgot Password")}>
+                                &nbsp;Forgot password?
+                            </span>
+                        </p>
+                    </div>
+                )}
+
+                {curentState === "Sign Up" && (
                     <p>
                         Already have an account? 
                         <span className="link" onClick={() => setCurrentState("Login")}>
                             &nbsp;Login here
                         </span>
                     </p>
-                }
+                )}
+
+                {curentState === "Forgot Password" && (
+                    <p>
+                        Remembered your password? 
+                        <span className="link" onClick={() => setCurrentState("Login")}>
+                            &nbsp;Login here
+                        </span>
+                    </p>
+                )}
             </form>
         </div>
     );

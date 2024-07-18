@@ -2,7 +2,7 @@ import React from 'react'
 import Search from '../../Components/Search/Search'
 import Weather from '../../Components/Weather/Weather'
 import './Home.css'
-const Home = ({setShowLogin}) => {
+const Home = ({setShowLogin} ) => {
  
   return (
     <div className="home-container">
@@ -12,4 +12,4 @@ const Home = ({setShowLogin}) => {
   )
 }
 
-export default Home
+export default Home;

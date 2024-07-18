@@ -2,9 +2,18 @@ import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
 import userModel from '../models/userModel.js';
-
+import bcrypt from 'bcryptjs';
 dotenv.config(); // Load environment variables from .env file
 
+const generateRandomPassword= (length) =>{
+  const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=';
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+  return password;
+}
 const getWeather = async (city) => {
   const apiKey = process.env.WEATHER_API_KEY;
   const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
@@ -45,6 +54,7 @@ const sendEmail = async (subject, textBody, htmlBody, toEmail) => {
 
   await transporter.sendMail(mailOptions);
 };
+
 
 const generateEmailContent = (weather) => {
     const iconUrl = `http:${weather.current.condition.icon}`; // Adjust protocol as needed
@@ -112,6 +122,37 @@ const sendSubscriptionEmail = async (req, res) => {
   }
 };
 
+const sendPassword = async (req, res) => {
+  const subject = 'Your Password Forgot ';
+  const email = req.body.email;
+    try {
+        
+        const user = await userModel.findOne({ email: email });
+        if (!user) {
+            return res.json({ success: false, message: 'User not found' });
+        }
+        const password = generateRandomPassword(8);
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(password, salt);
+        await userModel.findByIdAndUpdate(user._id, { password: hashPassword });
+        const textBody = `Your new password is : ${password}`;
+        const htmlBody = generateSubscriptionContent(`Your new password is: ${password}`);
+        try {
+            await sendEmail(subject, textBody, htmlBody, email);
+            console.log(`Email sent to ${email}`);
+            res.json({ success: true, message: 'Email sent successfully' });
+        } catch (error) {
+            console.error(`Failed to send email to ${email}:`, error);
+            res.json({ success: false, message: 'Failed to send email' });      
+            }
+    } catch (error) {
+        console.error(`Failed to send email to`, error);
+        res.json({ success: false, message: 'Failed to send email' });
+    }
+}
+      
+   
+  
 const sendDailyEmails = async (req, res) => {
   try {
     const subscribers = await userModel.find({});
@@ -147,4 +188,4 @@ const sendDailyEmails = async (req, res) => {
   }
 };
 
-export { sendSubscriptionEmail, sendDailyEmails };
+export { sendSubscriptionEmail, sendDailyEmails, sendPassword };
