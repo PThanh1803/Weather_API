@@ -7,6 +7,14 @@ Link demo https://weather-api-fontend.onrender.com/
 
 This Weather API allows users to get current weather data based on city names. The API fetches data from an external weather service and provides it in a user-friendly format. The front-end is developed using React.js for a responsive and dynamic user experience.
 
+## Technologies Used
+
+- **React.js**: Front-end framework
+- **Node.js**: Server environment
+- **Express.js**: Web framework for Node.js
+- **MongoDB**: Database
+- **Weather API**: External weather data provider
+
 ## Features
 
 - Fetch current weather data for a specific city.
