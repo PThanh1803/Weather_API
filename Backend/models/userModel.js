@@ -17,12 +17,10 @@ const userSchema = new mongoose.Schema({
     location: {
         type: String,
         default:"",
-        required: true
     },
     announcement:{
         type: Boolean,
         default: false,
-        required: true
 },
 }, {minimize:false});
 
