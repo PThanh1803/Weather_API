@@ -85,7 +85,7 @@ const generateSubscriptionContent = (message) => {
   return `
     <div style="font-family: Arial, sans-serif; color: #333; ">
       <div style="background-color: rgb(45, 117, 212); padding: 20px; border-radius: 10px; text-align: center;">
-        <h2 style="color: #555;">${message}</h2>
+        <h3 style="color: #555;">${message}</h3>
       </div>
       <footer style="margin-top: 20px; text-align: center; color: #777;">
         <p>Thank you for subscribing to our weather updates!</p>
@@ -107,10 +107,10 @@ const sendSubscriptionEmail = async (req, res) => {
     let textBody = '';
     let htmlBody = '';
     if (subscriber.announcement) {
-      textBody = "You have subscribed to weather updates. Please check your email for daily weather updates.";
+      textBody = "You have subscribed to weather updates. Please check your email for daily weather updates. You will receive notification about weather forecast EVERYDAY AT 7:10 AM";
       htmlBody = generateSubscriptionContent("You have subscribed to weather updates. Please check your email for daily weather updates.");
     } else {
-      textBody = "You have unsubscribed from weather updates. You will no longer receive daily weather updates.";
+      textBody = "You have unsubscribed from weather updates. You will no longer receive daily weather updates. ";
       htmlBody = generateSubscriptionContent("You have unsubscribed from weather updates. You will no longer receive daily weather updates.");
     }
     await sendEmail(subject, textBody, htmlBody, email);
