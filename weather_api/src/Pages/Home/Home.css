@@ -1,0 +1,14 @@
+ .home-container{
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    animation: fadeIn 2s;
+  }
+
+  @media  (max-width: 900px) {
+    .home-container{
+      flex-direction: column;
+    }
+  }
+  

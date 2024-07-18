@@ -1,0 +1,114 @@
+.navbar{  
+    background-color: rgb(22, 148, 150);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 20px;
+}
+
+.navbar .logo {
+    width: 80px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.navbar .logo:hover {
+    cursor: pointer;
+    scale: 1.1;
+    transition: 0.5s;
+}
+
+.navbar h1 {
+    color: white;
+    font-size: max(2.5vw, 22px);
+}
+.navbar button   {
+    background-color: rgb(216, 166, 157);
+    color: #0f1014;
+    border: 1px solid tomato;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: max(1vw, 12px);
+    transition: 0.5s;
+}
+
+.navbar button:hover {
+    background-color: tomato;
+    color: white;
+}
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-right .bell {
+    width: max(2vw, 22px);
+    cursor: pointer;
+    transition: 0.5s;
+    margin-right: 20px;
+}
+
+.navbar-right .bell:hover{
+    cursor: pointer;
+    scale: 1.1;
+    transition: 0.2s;
+
+}
+   
+
+
+.navbar-profile-name h3, .navbar-profile-name p{
+    color: rgb(51, 45, 45);
+    font-size: max(1.2vw, 12px);
+}
+
+.navbar-profile{
+    position: relative;
+    padding: 1vw 1.5vw;
+    height: 100%;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.navbar-profile img{
+    width: max(1.5vw, 22px);
+}
+
+.navbar-profile .nav-profile-dropdown{
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    display: none;
+}
+
+.navbar-profile:hover .nav-profile-dropdown{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 10px;
+    padding:  12px 25px;
+    border-radius: 5px;
+    border: 1px solid tomato;
+    outline: 2px solid white;
+    list-style: none;
+}
+
+ .nav-profile-dropdown li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.nav-profile-dropdown  img{
+    width: 20px;
+}
+
+ .navbar-right li:hover{
+    color: tomato !important;
+}
+

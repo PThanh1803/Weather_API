@@ -1,0 +1,142 @@
+.notification {
+    background-color: #f0f4f8;
+    width: max(40vw, 400px);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .notification h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 24px;
+  }
+  
+  .notification form {
+    margin-bottom: 20px;
+  }
+  
+  .notification label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .notification input[type="email"],
+  .notification input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .notification button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+  }
+  
+
+  
+  .notification button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+    width: 48%;
+    margin-right: 2%;
+  }
+  
+  .notification button:last-child {
+    margin-right: 0;
+  }
+  
+  .notification button:hover {
+    background-color: #0056b3;
+  }
+  
+  .notification div {
+    margin-top: 10px;
+  }
+  
+  .notification p {
+    margin: 5px 0;
+    font-size: 18px;
+  }
+  
+
+  .notification .weather-info-item {
+    display: flex;
+    align-items: space-between;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #2691af;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notification-header{
+    display: flex;
+    align-items: space-between;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding: 10px ;
+  }
+
+  .notification-header h3{
+    margin: 0;
+    color: #074e84;
+    cursor: pointer;
+  }
+
+  .notification button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .notification-header h3:hover{
+    color: #ff2f00;
+  }
+  .weather-info-item img {
+    width: 60px;
+    margin-right: 10px;
+  }
+  
+  .weather-info-item p {
+    margin: 2px;
+  }
+  .weather-forecast {
+    display: grid;
+    grid-template-columns: 2fr 2fr ;
+    grid-gap: 20px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .weather-forecast .weather-forecast-item {
+    background-color: #2691af;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  
