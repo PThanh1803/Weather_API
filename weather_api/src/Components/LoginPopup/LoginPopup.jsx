@@ -120,7 +120,7 @@ const LoginPopup = ({ setShowLogin}) => {
                                 required
                             />
                             <a onClick={toggleConfirmPasswordVisibility}>
-                                {passwordVisible ? "Hide" : "Show"}
+                                {passwordConfirm ? "Hide" : "Show"}
                             </a>
                         </div>
                     )}
