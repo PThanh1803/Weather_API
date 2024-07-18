@@ -4,7 +4,7 @@ import axios from "axios";
 export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
-    const url = "http://localhost:4000"
+    const url = "https://weather-api-backend.onrender.com"
     const [token, setToken] = useState("")
     const [userData, setUserData] = useState({})
     const [city, setCity] = useState('Ho Chi Minh')
