@@ -101,7 +101,7 @@ const LoginPopup = ({ setShowLogin}) => {
                                 type={passwordVisible ? "text" : "password"}
                                 placeholder="Password"
                                 required
-                            > </input>              
+                            />              
                             <a onClick={togglePasswordVisibility}> {passwordVisible ? "Hide" : "Show"}</a>
                         </div>
                     )}
