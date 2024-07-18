@@ -16,7 +16,7 @@ const LoginPopup = ({ setShowLogin}) => {
         confirmPassword: '',
     });
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const [passwordConfirm, setPasswordConfirm] = useStae(false);
+    const [passwordConfirm, setPasswordConfirm] = useState(false);
 
     const onChangeHandler = (event) => {
         const name = event.target.name;
@@ -30,7 +30,7 @@ const LoginPopup = ({ setShowLogin}) => {
 
     const toggleConfirmPasswordVisibility = ()=>{
         setPasswordConfirm(!passwordConfirm);
-
+    }
     const onForgetPassword = async (event) => {
         event.preventDefault();
         try {
@@ -172,4 +172,4 @@ const LoginPopup = ({ setShowLogin}) => {
     );
 }
 
-export default LoginPopup;
+export default LoginPopup 
