@@ -50,7 +50,7 @@ const Weather = () => {
                     <div className="weather-info-right">
                         <div>
                             <h1>{weatherData.currentWeather.location.name} ({date})</h1>
-                            <h2 >Last Updated {time}</h2>
+                            <h2 className="last-updated">Last Updated {time}</h2>
                         </div>
                        
                         <div className="weather-info-item">
