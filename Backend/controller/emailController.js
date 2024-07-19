@@ -114,6 +114,20 @@ const sendSubscriptionEmail = async (req, res) => {
       htmlBody = generateSubscriptionContent("You have unsubscribed from weather updates. You will no longer receive daily weather updates.");
     }
     await sendEmail(subject, textBody, htmlBody, email);
+     if (subscriber.announcement) {
+      try {
+        const weather = await getWeather(city);
+        const subject = `Daily Weather Update for ${city}`;
+        const textBody = `Weather in ${city}: ${weather.current.condition.text}, Temperature: ${weather.current.temp_c}°C`;
+        const img = weather.current.condition.icon;
+        console.log(img);
+        const htmlBody = generateEmailContent(weather);
+        await sendEmail(subject, textBody, htmlBody, email);
+        console.log(`Email sent to ${email}`);
+      } catch (error) {
+        console.error(`Failed to send email to ${email}:`, error);
+      }
+     };
     console.log(`Email sent to ${email}`);
     res.json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
