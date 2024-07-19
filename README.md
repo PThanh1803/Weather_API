@@ -1,7 +1,9 @@
 # Weather API
 
 A simple Weather API web application that provides weather information for a specified location, with a front-end built using React.js.
-Link demo https://weather-api-fontend.onrender.com/
+
+Link demo:  https://weather-api-fontend.onrender.com/
+  (Note: Because of using the free version, if there is no activity for a certain period, the server will be shut down to save resources. When you need to use it again, the server will take about 50 seconds to restart. This can cause a delay in processing your requests. )
 
 ## Description
 
