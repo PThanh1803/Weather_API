@@ -34,7 +34,7 @@ const Navbar = ({setShowLogin,setShowReset}) => {
                       <ul className="nav-profile-dropdown">
                           <li onClick={()=>setShowReset(true)}> 
                               <img src={assets.search} alt="" />
-                              <p>Setting</p>
+                              <p>Change Pass</p>
                           </li>
                           <hr/>
                           <li onClick={logout}> 
