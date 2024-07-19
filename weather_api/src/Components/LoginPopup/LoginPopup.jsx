@@ -5,7 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { assets } from '../../assets/assets';
 
-const LoginPopup = ({ setShowLogin}) => {
+const LoginPopup = ({ setShowLogin }) => {
     const { url } = useContext(StoreContext);
     const { setToken } = useContext(StoreContext);
     const [curentState, setCurrentState] = useState("Login");
@@ -17,6 +17,7 @@ const LoginPopup = ({ setShowLogin}) => {
     });
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [passwordConfirm, setPasswordConfirm] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // Add loading state
 
     const onChangeHandler = (event) => {
         const name = event.target.name;
@@ -28,11 +29,13 @@ const LoginPopup = ({ setShowLogin}) => {
         setPasswordVisible(!passwordVisible);
     }
 
-    const toggleConfirmPasswordVisibility = ()=>{
+    const toggleConfirmPasswordVisibility = () => {
         setPasswordConfirm(!passwordConfirm);
     }
+
     const onForgetPassword = async (event) => {
         event.preventDefault();
+        setIsLoading(true); // Set loading to true before the API call
         try {
             const response = await axios.post(`${url}/api/email/password`, { email: data.email });
             if (response.data.success) {
@@ -42,14 +45,19 @@ const LoginPopup = ({ setShowLogin}) => {
             }
         } catch (error) {
             console.error("There was an error!", error);
+            toast.error("An error occurred while sending the email. Please try again.");
+        } finally {
+            setIsLoading(false); // Set loading to false after the API call
         }
     }
 
     const onLogin = async (event) => {
         event.preventDefault();
+        setIsLoading(true); // Set loading to true before the API call
 
         if (curentState === "Sign Up" && data.password !== data.confirmPassword) {
             toast.error("Passwords do not match. Please try again.");
+            setIsLoading(false); // Set loading to false if there's an error
             return;
         }
 
@@ -77,6 +85,8 @@ const LoginPopup = ({ setShowLogin}) => {
         } catch (error) {
             console.error("There was an error!", error);
             toast.error("An error occurred while processing your request. Please try again.");
+        } finally {
+            setIsLoading(false); // Set loading to false after the API call
         }
     }
 
@@ -124,7 +134,13 @@ const LoginPopup = ({ setShowLogin}) => {
                             </a>
                         </div>
                     )}
-                    <button type="submit">{curentState === "Sign Up" ? "Create Account" : (curentState === "Forgot Password" ? "Send Email" : "Login")}</button>
+                    <button type="submit" disabled={isLoading}>
+                        {isLoading ? (
+                            <span className="spinner"></span>
+                        ) : (
+                            curentState === "Sign Up" ? "Create Account" : (curentState === "Forgot Password" ? "Send Email" : "Login")
+                        )}
+                    </button>
                 </div>
 
                 {curentState === "Sign Up" && (
@@ -172,4 +188,4 @@ const LoginPopup = ({ setShowLogin}) => {
     );
 }
 
-export default LoginPopup 
+export default LoginPopup;
