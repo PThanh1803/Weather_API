@@ -22,7 +22,7 @@ app.use('/api/weather', weatherRouter);
 app.use('/api/email', emailRoute);
 
 // send daily emails
-cron.schedule('5 23 * * *', async () => {
+cron.schedule('15 10 * * *', async () => {
     console.log('running a task every minute');
     await sendDailyEmails();
   });
