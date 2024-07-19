@@ -66,7 +66,7 @@ const Weather = () => {
             ) : (
                 <div className='weather-info'>
                     <div className="weather-info-right">
-                        <h1>London(2023-06-19)</h1>
+                        <h1>London(2024-07-19)</h1>
                         <div className="weather-info-item">
                             <img src={assets.cloud} alt="" />
                             <h2>Temperature: 15°C</h2>

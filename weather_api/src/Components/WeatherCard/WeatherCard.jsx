@@ -14,7 +14,7 @@ const WeatherCard = ({weatherData}) => {
             <h2>Wind: {weatherData.day.maxwind_kph}km/h</h2>
         </div>
       :<div className="weather-card">
-          <h2 className="weather-card-title">(2024-07-17)</h2>
+          <h2 className="weather-card-title">(2024-07-19)</h2>
           <img src={assets.cloud} alt="" />
           <h2>Temp: 15°C</h2>
           <h2>Wind: 5km/h</h2>
