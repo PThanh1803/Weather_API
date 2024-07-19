@@ -171,7 +171,8 @@ const sendDailyEmails = async (req, res) => {
   try {
     const subscribers = await userModel.find({});
     if (!subscribers || subscribers.length === 0) {
-      return res.json({ success: false, message: 'No subscribers found' });
+        console.log("Khong co nguoi dung nao");
+        return;
     }
 
     for (const subscriber of subscribers) {
@@ -194,11 +195,9 @@ const sendDailyEmails = async (req, res) => {
         console.error(`Failed to send email to ${email}:`, error);
       }
     }
-
-    res.json({ success: true, message: 'Daily emails sent successfully' });
+    console.log('Daily emails sent successfully');
   } catch (error) {
     console.error('Error sending daily emails:', error);
-    res.json({ success: false, message: 'Failed to send daily emails' });
   }
 };
 
