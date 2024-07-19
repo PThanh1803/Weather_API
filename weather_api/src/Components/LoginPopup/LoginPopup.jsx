@@ -7,7 +7,7 @@ import { assets } from '../../assets/assets';
 
 const LoginPopup = ({ setShowLogin }) => {
     const { url } = useContext(StoreContext);
-    const { setToken } = useContext(StoreContext);
+    const { setToken , setHistory} = useContext(StoreContext);
     const [curentState, setCurrentState] = useState("Login");
     const [data, setData] = useState({
         name: '',
@@ -74,10 +74,11 @@ const LoginPopup = ({ setShowLogin }) => {
             const response = await axios.post(newUrl, data);
             if (response.data.success) {
                 if (curentState === "Login" || curentState === "Sign Up") {
+                    setHistory([]);
                     setToken(response.data.token);
                     localStorage.setItem("token", response.data.token);
                 }
-                setShowLogin(false);
+                setShowLogin(false);  
                 toast.success(response.data.message);
             } else {
                 toast.error(response.data.message);
@@ -136,7 +137,7 @@ const LoginPopup = ({ setShowLogin }) => {
                     )}
                     <button type="submit" disabled={isLoading}>
                         {isLoading ? (
-                            <span className="spinner"></span>
+                            <span className="spinner-1"></span>
                         ) : (
                             curentState === "Sign Up" ? "Create Account" : (curentState === "Forgot Password" ? "Send Email" : "Login")
                         )}

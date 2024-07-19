@@ -6,13 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import {assets} from '../../assets/assets.js'
 
 const Navbar = ({setShowLogin,setShowReset}) => {
-  const {token ,setToken, userData, url} = React.useContext(StoreContext)
+  const {token ,setToken, userData, setHistory,url} = React.useContext(StoreContext)
 
   const navigate = useNavigate();
   const logout = ()=>{
       localStorage.removeItem("token")
       setToken("");
       navigate("/");
+      setHistory([]);
   }
 
   return (

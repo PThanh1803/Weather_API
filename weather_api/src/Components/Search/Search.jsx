@@ -1,25 +1,44 @@
-import React, { useEffect } from 'react'
-import './Search.css'
-import { useContext } from 'react'
-import { StoreContext } from '../../Context/StoreContext'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import './Search.css';
+import { useContext } from 'react';
+import { StoreContext } from '../../Context/StoreContext';
+import { useNavigate } from 'react-router-dom';
 
 const Search = ({ setShowLogin }) => {
   const navigate = useNavigate();
-  const { token, userData, url, setCity, city, currentCity } = useContext(StoreContext)
-  const [loca, setLoca] = React.useState('')
+  const { token, setCity, currentCity,history, setHistory } = useContext(StoreContext);
+  const [loca, setLoca] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const storedHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    setHistory(storedHistory);
+  }, []);
+
+  const handleFocus = () => {
+    setShowPopup(true);
+  }
+
+  const handleBlur = () => {
+    setTimeout(() => setShowPopup(false), 100); // Delay to allow click event to register
+  }
 
   const onchange = (e) => {
     setLoca(e.target.value);
   }
 
   const handleOnClick = () => {
-    setCity(loca)
-    console.log(city)
+    if (loca.trim() !== '') {
+      setCity(loca);
+      const updatedHistory = [loca, ...history.filter(item => item !== loca)];
+      setHistory(updatedHistory);
+      localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
+      setShowPopup(false);
+    }
   }
 
   const handleOnClickCurr = () => {
-    setCity(currentCity)
+    setCity(currentCity);
   }
 
   const handleKeyPress = (e) => {
@@ -28,19 +47,38 @@ const Search = ({ setShowLogin }) => {
     }
   }
 
+  const handleHistoryClick = (city) => {
+    setLoca(city);
+    setCity(city);
+    setShowPopup(false);
+  }
+
   return (
     <div className="search">
       <div className="search-container">
         <h1>Enter a city name</h1>
-        <input 
-          onChange={onchange} 
-          onKeyPress={handleKeyPress} 
-          type="text" 
-          placeholder='E.g, New York, London, Tokyo' 
-        />
-        <button onClick={handleOnClick}>Search</button>
+        <div className="search-popup" onFocus={handleFocus} onBlur={handleBlur}>
+          <input 
+            onChange={onchange} 
+            onKeyPress={handleKeyPress} 
+            type="text" 
+            placeholder='E.g, New York, London, Tokyo'
+            value={loca}
+          />
+          {showPopup && history.length > 0 && (
+            <div className="search-popup-content">
+              <h3>Recent Searches</h3>
+              <ul>
+                {history.map((item, index) => (
+                  <li key={index} onClick={() => handleHistoryClick(item)}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+        <button onClick={handleOnClick} >Search </button>
         <hr />
-        <button onClick={handleOnClickCurr}>Use Current Location</button>
+        <button onClick={handleOnClickCurr}>Use Current Location </button>
       </div>
       <div>
         {token ? (
@@ -66,4 +104,4 @@ const Search = ({ setShowLogin }) => {
   )
 }
 
-export default Search
+export default Search;

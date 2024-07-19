@@ -11,12 +11,14 @@ const StoreContextProvider = (props) => {
   const [currentCity, setCurrentCity] = useState('Ho Chi Minh');
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(true);
-
+  const [history, setHistory] = React.useState([]);
+    const [isLoading1, setIsLoading1] = React.useState(false);
   const fetchUserData = async (token) => {
     try {
       const response = await axios.post(`${url}/api/user/profile`, {}, { headers: { token } });
       setUserData(response.data.data);
       setCity(response.data.data.location);
+      setCurrentCity(response.data.data.location);
       setLoading(false);
     } catch (error) {
       console.log("Error profile", error);
@@ -80,6 +82,8 @@ const StoreContextProvider = (props) => {
     setCurrentCity,
     updateUserData,
     setLocation,
+    history, setHistory,
+    isLoading1, setIsLoading1
   };
 
   return (

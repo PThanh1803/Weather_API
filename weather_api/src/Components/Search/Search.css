@@ -87,3 +87,73 @@
 .banner button:hover {
     background-color: #c65505;
 }
+
+.search-popup{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-popup-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.2s;
+    top: 40px;
+    left: 10px;
+}
+
+.search-popup-content h3 {
+    font-size: max(0.8vw, 14px);
+    font-weight: 500;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.search-popup-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-popup-content li {
+    font-size: max(0.8vw, 12px);
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-popup-content li:hover {
+    background: #e0e0e0;
+}
+
+.spinner-1 {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #4CAF50;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

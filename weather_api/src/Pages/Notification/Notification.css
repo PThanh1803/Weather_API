@@ -108,6 +108,7 @@
     color: #074e84;
     cursor: pointer;
     font-size: max(1.2vw, 12px);
+    padding-left: 10px;
   }
 
   .notification button:disabled {

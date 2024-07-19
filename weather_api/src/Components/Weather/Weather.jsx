@@ -7,14 +7,18 @@ import { toast } from 'react-toastify';
 import { assets } from '../../assets/assets.js';
 
 const Weather = () => {
-    const { city, url, setCity} = useContext(StoreContext);
+    const { city, url, setCity } = useContext(StoreContext);
     const [weatherData, setWeatherData] = useState(null);
     const [weatherForecast, setWeatherForecast] = useState([]);
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
+    const [viewMore, setViewMore] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const initialDaysToShow = 4;
 
     const searchWeather = async () => {
         try {
+            setLoading(true);
             console.log(`${url}/api/weather/weather?query=${city}`);
             const response = await axios.get(`${url}/api/weather/weather?query=${city}`);
             console.log(response.data);
@@ -28,6 +32,8 @@ const Weather = () => {
             console.log(error);
             toast.error('City not found');
             setCity('Ho Chi Minh');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -36,7 +42,8 @@ const Weather = () => {
     }, [city]);
 
     return (
-        <div className="weather">
+        <div className={`weather ${loading ? 'loading' : ''}`}>
+            {loading && <div className="spinner">Loading...</div>}
             {weatherData ? (
                 <div className='weather-info'>
                     <div className="weather-info-right">
@@ -90,8 +97,8 @@ const Weather = () => {
                 <h1>Weather Card</h1>
                 <div>
                     {weatherData ? (
-                        <div className="weather-card-item">
-                            {weatherForecast.slice(1).map((item, index) => (
+                        <div className={`weather-card-item ${viewMore ? 'view-more' : ''}`}>
+                            {weatherForecast.slice(0, viewMore ? weatherForecast.length : initialDaysToShow).map((item, index) => (
                                 <WeatherCard weatherData={item} key={index} />
                             ))}
                         </div>
@@ -104,6 +111,11 @@ const Weather = () => {
                         </div>
                     )}
                 </div>
+                {weatherData && weatherForecast.length > initialDaysToShow && (
+                    <button className="view-more-button" onClick={() => setViewMore(!viewMore)}>
+                        {viewMore ? 'Show Less' : 'View More'}
+                    </button>
+                )}
             </div>
         </div>
     );
