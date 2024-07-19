@@ -17,7 +17,7 @@ const getWeather = async (city) => {
       params: {
         key: apiKey,
         q: city,
-        days: 5
+        days: 10
       }
     });
 
